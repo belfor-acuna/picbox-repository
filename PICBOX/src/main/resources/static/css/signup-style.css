@@ -1,0 +1,30 @@
+* {
+  margin-top: 0%;
+  margin-left: 0%;
+  margin-bottom: 0%;
+  margin-right: 0%;
+}
+
+body {
+  background-image: url("../assets/Background.png") !important;
+}
+
+input:hover{
+  opacity: 0.8;
+  border-radius: 10px;
+}
+img:hover{
+  opacity: .8;
+}
+
+.navbar .btn,body .btn{
+  transition: all .3s ease-in-out;
+}
+
+.btn:hover,body .btn:hover{
+  border-radius: 10px;
+  background-color:#000000 !important;
+  color:white !important;
+}
+
+

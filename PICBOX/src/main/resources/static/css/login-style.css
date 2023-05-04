@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    transition: all .3s ease-in-out;
+    border: none;
+}
+
+
+body{
+    background-image: url(../assets/Background.png);
+    background-size: cover;
+}
+
+input:hover{
+    opacity: 0.8;
+    border-radius: 10px;
+}
+img:hover{
+    opacity: .8;
+}
+
+.navbar .btn,body .btn{
+    transition: all .3s ease-in-out;
+  }
+  
+.btn:hover,body .btn:hover{
+    border-radius: 10px;
+    background-color:#000000 !important;
+    color:white !important;
+  }
+
+

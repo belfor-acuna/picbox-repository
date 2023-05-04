@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-size: cover;
+}
+
+body .btn{
+    transition: all .3s ease-in-out;
+  }
+  
+  .navbar .btn:hover,body .btn:hover{
+    border-radius: 10px;
+    background-color:#000000 !important;
+    color:white !important;
+  }
+  .navbar .dropdown-item:hover{
+    background-color: #99cfee;
+  }
+#searchbar{
+    width: 60%;
+    margin-right: 1%;
+  }
+h1{
+  transition: all .3s ease-in-out;
+}
+h1:hover{
+  color: white;
+  margin-left: 25%;
+  width: 50%;
+  border-radius: 20px;
+  background-color: #49717486;
+}
+body input,#descripcion,#etiquetas, #searchbar{
+  transition: all .37s ease-in-out;
+}
+
+body input:hover,#descripcion:hover,#etiquetas:hover, #searchbar:hover{
+  opacity: 0.8;
+}
