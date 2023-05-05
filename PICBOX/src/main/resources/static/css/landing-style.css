@@ -47,7 +47,6 @@ ul{
   height: 100%;
   vertical-align: middle;
   border-radius: 10px;
-  image-rendering: optimizeSpeed;
 }
 
 .overlay{

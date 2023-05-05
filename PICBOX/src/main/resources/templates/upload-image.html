@@ -16,7 +16,7 @@
   </head>
   <body style="background-image: url(/static/assets/Background.png)">
   <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #4d749e">
-      <a class="navbar-brand" href="../../../../../Art-Repository-B.A/html/landing-page.html"><img src="/resources/logo/logo-with-title.png" class="ms-1 rounded-circle" height="60" alt=""></a>
+      <a class="navbar-brand" href="/landing-page"><img src="/assets/logo/logo-with-title.png" class="ms-1 rounded-circle" height="60" alt=""></a>
       <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
               aria-expanded="false" aria-label="Toggle navigation"></button>
       <div class="collapse navbar-collapse" id="collapsibleNavId">
@@ -28,53 +28,55 @@
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle btn text-white ms-1" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Belfor Acuña</a>
                   <div class="dropdown-menu" aria-labelledby="dropdownId" style="background-color: #000000;">
-                      <a class="dropdown-item text-white" href="../../../../../Art-Repository-B.A/html/profile.html">Mi perfil</a>
-                      <a class="dropdown-item text-white" href="../../../../../Art-Repository-B.A/html/profile-settings.html">Configuracion de Usuario</a>
+                      <a class="dropdown-item text-white" href="/profile">Mi perfil</a>
+                      <a class="dropdown-item text-white" href="/profile-settings">Configuracion de Usuario</a>
                   </div>
               </li>
               <li class="nav-item">
-                  <a class="nav-link ms-2 btn text-white w-100" href="upload-image.html"  style="background-color:#79a6c4">Subir imagen</a>
+                  <a class="nav-link ms-2 btn text-white w-100" href="/upload-image"  style="background-color:#79a6c4">Subir imagen</a>
 
               <li class="nav-item">
-                  <a class="nav-link ms-2 btn text-white" href="../../../../../Art-Repository-B.A/html/landing-page.html">Galería</a>
+                  <a class="nav-link ms-2 btn text-white" href="/landing-page">Galería</a>
               </li>
 
               <li class="nav-item">
-                  <a class="nav-link" href="../../../../../Art-Repository-B.A/html/profile.html"><img src="/resources/dos-autos.png" height="60" class="d-none rounded" ></a>
+                  <a class="nav-link" href="/profile"><img src="/static/assets/dos-autos.png" height="60" class="d-none rounded" ></a>
               </li>
           </ul>
       </div>
   </nav> <br><br><br><br><br>
         <div class="container">
-            <form action="../../../../../Art-Repository-B.A/html/landing-page.html" id="upload-img-form">
             <div class="row d-flex justify-content-center">
+                <form th:action="@{/api/upload}" th:object="${imageDTO}" method="post" enctype="multipart/form-data">
+
                 <div class="col-4 rounded"  style="background-color: #79a6c4">
                     <div class="row d-flex justify-content-center mt-5" >
                         <img src="/resources/logo/logo-title-only.png" class=" rounded-pill w-50">
-                        <label for="image" class="fs-5 text-center text-white mt-5">Elige o arrastra tu imagen</label>
-                        <input type="file" name="image" required id="image" class=" py-5 w-75 mt-2 rounded" style="background-color: #fff;">
+                        <label for="file" class="fs-5 text-center text-white mt-5">Elige o arrastra tu imagen</label>
+                        <input type="file" name="file" required id="file" class=" py-5 w-75 mt-2 rounded" style="background-color: #fff;">
                     </div>
                     
                 </div>
-                <div class="col-4 ms-1 rounded"  style="background-color: #4d749e"> 
-                    
-                        <label for="title" class="fs-5 mt-3 text-white">Título:</label><br>
-                        <input type="text" name="title"class="rounded w-100" required minlength="3" id="title">
+                <div class="col-4 ms-1 rounded"  style="background-color: #4d749e">
+
+                    <label for="title" class="fs-5 mt-3 text-white">Título:</label><br>
+                        <input type="text" name="title" th:field="*{title}" class="rounded w-100" required minlength="3" id="title">
                         <div class="mb-3 mt-3">
                           <label for="descripcion" class="form-label text-white fs-5">Descripción:</label>
-                          <textarea class="form-control" name="descripcion" id="descripcion" rows="5" cols="3" style="resize: none;"></textarea>
+                          <textarea class="form-control" th:field="*{description}" name="descripcion" id="descripcion" rows="5" cols="3" style="resize: none;"></textarea>
                         </div>
-                        <div class="mb-3">
-                            <label for="etiquetas" class="form-label text-white fs-5">Etiquetas:</label>
-                            <textarea class="form-control" name="etiquetas" id="etiquetas" required minlength="6" rows="5" cols="3" style="resize: none;" placeholder="Añade las etiquetas de tu imagen separadas por un espacio. Estas ayudaran al motor de busqueda a encontrar tu foto."></textarea>
-                          </div>
-                    
+                        <select name="tagIds" multiple>
+                        <option th:each="tag : ${tags}" th:value="${tag.id}" th:text="${tag.name}"></option>
+                        </select>
+                    <div class="row d-flex justify-content-center mb-3">
+                        <button class="btn text-white w-25 mt-1 fw-bold" type="submit" style="background-color: #000000;"> Subir </button>
+                    </div>
+
                 </div>
+                </form>
             </div>
-            <div class="row d-flex justify-content-center mb-3">
-                <button class="btn text-white w-25 mt-1 fw-bold" form="upload-img-form" style="background-color: #000000;"> Subir </button>
-            </div>
-        </form>
+
+
         </div>
   </body>
 </html>

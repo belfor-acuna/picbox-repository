@@ -23,10 +23,6 @@ public class UserController {
         return "redirect:/gallery";
     }
 
-    @GetMapping("/gallery")
-    public String gallery(){
-        return "landing-page";
-    }
 
 
     @GetMapping("/signup")
@@ -59,17 +55,19 @@ public class UserController {
 
     @PostMapping("/api/login")
     public String loginUser(LoginDTO loginDTO, Model model){
+        String rol = "";
         try {
-            String rol = service.loginUser(loginDTO);
-            if (rol == "Administrador")return "showUsers";
+             rol = service.loginUser(loginDTO);
 
-            if (rol == "Usuario")return "gallery";
         }
         catch (Exception e){
             System.out.println(e.getMessage());
             return "redirect:/login";
         }
-        return "redirect:/showUsers";
+        if (rol.equals("Administrador"))return "redirect:/showUsers";
+
+        if (rol.equals("Usuario"))return "redirect:/gallery";
+        return rol;
     }
 
     @GetMapping("/users/edit/{id}")
@@ -98,10 +96,4 @@ public class UserController {
         service.deleteUser(id);
         return "redirect:/showUsers";
     }
-
-    @GetMapping("/upload-image")
-    public String showUploadImageView(){
-        return "redirect:/upload-image";
-    }
-
 }

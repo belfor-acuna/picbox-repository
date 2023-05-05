@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "image")
@@ -20,6 +21,7 @@ import java.util.List;
 @Setter
 public class Image {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_image")
@@ -27,21 +29,21 @@ public class Image {
 
     @Column (name = "title_image")
     @NotBlank
-    @NotNull
     private String title;
 
     @Column (name = "description_image")
     private String description;
 
     @Lob
-    @NotNull
     @Column (name = "image")
     private byte[] image;
 
-    @NotEmpty
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "image_tag", joinColumns = @JoinColumn(name = "id_image"), inverseJoinColumns = @JoinColumn(name = "id_tag"))
-    private HashSet<Tag> tags;
+
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+    @JoinTable(name = "image_tag",
+            joinColumns = @JoinColumn(name = "id_image"),
+            inverseJoinColumns = @JoinColumn(name = "id_tag"))
+    private Set<Tag> tags = new HashSet<>();
 
 
 }

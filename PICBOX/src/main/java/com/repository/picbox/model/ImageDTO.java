@@ -2,13 +2,16 @@ package com.repository.picbox.model;
 
 import lombok.*;
 
+import java.util.HashSet;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class LoginDTO {
+public class ImageDTO {
 
-    private String email;
-    private String password;
+    private String title;
+    private String description;
+
 }

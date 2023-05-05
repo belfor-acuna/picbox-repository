@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "tag")
 @AllArgsConstructor
@@ -20,8 +23,10 @@ public class Tag {
     private Integer id;
 
     @Column (name = "name_tag")
-    private String nombre;
+    private String name;
 
+    @ManyToMany(mappedBy = "tags")
+    private Set<Image> images = new HashSet<>();
     }
 
 

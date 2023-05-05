@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/landing-style.css" />
+    <link rel="stylesheet" type="text/css" media='screen'  href="/css/landing-style.css" />
     <script src="https://kit.fontawesome.com/cc86eb82ec.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
@@ -21,7 +21,7 @@
         </form>
         <ul class="navbar-nav me-auto mt-2 mt-lg-0">
           <li class="nav-item">
-            <a class="nav-link mt-1 ms-2 btn text-white w-100" href="/upload-image">Subir imagen</a>
+            <a class="nav-link mt-1 ms-2 btn text-white w-100" href="/upload">Subir imagen</a>
         </li>
             <li class="nav-item">
               <a class="nav-link mt-1  btn text-white w-100" href="/login">Iniciar Sesión</a>
@@ -38,16 +38,20 @@
 </nav>
   <body>
     <div class="container-fluid">
-        <ul class="art-gallery">  
-            <li th:each="image : ${images}" th:object="${images}">
-              <div class="">
-                  <span th:each="tag=${tags}" th:text="*{tags.title}">
-                  </span>
-              </div>
-            </li>
+        <ul class="art-gallery">
+            <li th:each="image: ${images}">
+                <a href="#">
+                    <img th:src="@{'/image/' + ${image.id}}" alt="" />
 
+                </a>
+                <div class="overlay">
+                    <span
+                            th:text="${image.tags}">
+                    </span>
+                </div>
+            </li>
         </ul>
     </div>
-    <script src="jquery-3.6.4.min.js"></script>
+
   </body>
 </html>
