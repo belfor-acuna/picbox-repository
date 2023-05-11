@@ -73,7 +73,9 @@ ul{
   transform:scale(1);
 }
 
-
+img{
+  image-rendering: optimizeSpeed;
+}
 
 .art-gallery::after {
   content: "";
