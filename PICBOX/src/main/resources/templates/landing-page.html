@@ -39,16 +39,13 @@
   <body>
     <div class="container-fluid">
         <ul class="art-gallery">
-            <li th:each="image: ${images}">
-                <a href="#">
-                    <img th:src="@{'/image/' + ${image.id}}" alt="" />
-
-                </a>
-                <div class="overlay">
-                    <span
-                            th:text="${image.tags}">
-                    </span>
-                </div>
+            <li th:each="image:${images}">
+                <img th:src="@{/image/{id}(id=${image.id})}">
+                    <a th:href="@{/fullview/image/{id}(id=${image.id})}" class="w-100">
+                        <div class="overlay">
+                        <span th:text="${image.title}"></span>
+                        </div>
+                    </a>
             </li>
         </ul>
     </div>

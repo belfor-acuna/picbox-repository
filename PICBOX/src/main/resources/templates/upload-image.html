@@ -65,8 +65,8 @@
                           <label for="descripcion" class="form-label text-white fs-5">Descripción:</label>
                           <textarea class="form-control" th:field="*{description}" name="descripcion" id="descripcion" rows="5" cols="3" style="resize: none;"></textarea>
                         </div>
-                        <select name="tagIds" multiple>
-                        <option th:each="tag : ${tags}" th:value="${tag.id}" th:text="${tag.name}"></option>
+                        <select name="tags" class="form-select" id="tags" multiple size="4">
+                        <option th:each="tag:${tags}" th:value="${tag.id}" th:text="${tag.name}"></option>
                         </select>
                     <div class="row d-flex justify-content-center mb-3">
                         <button class="btn text-white w-25 mt-1 fw-bold" type="submit" style="background-color: #000000;"> Subir </button>

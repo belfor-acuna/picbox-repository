@@ -13,5 +13,6 @@ public class ImageDTO {
 
     private String title;
     private String description;
+    public HashSet<Tag> tags;
 
 }

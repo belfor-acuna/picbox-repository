@@ -24,10 +24,10 @@ public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_image")
+    @Column(name = "id")
     private Integer id;
 
-    @Column (name = "title_image")
+    @Column (name = "title")
     @NotBlank
     private String title;
 
@@ -35,8 +35,8 @@ public class Image {
     private String description;
 
     @Lob
-    @Column (name = "image")
-    private byte[] image;
+    @Column (name = "file")
+    private byte[] file;
 
 
     @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
