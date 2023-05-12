@@ -3,6 +3,7 @@ package com.repository.picbox.services;
 import com.repository.picbox.model.*;
 import com.repository.picbox.repositories.imageRepository;
 import com.repository.picbox.repositories.tagRepository;
+import com.repository.picbox.repositories.userRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,9 @@ public class ImageService {
     @Autowired
     private tagRepository tagRepository;
 
+    @Autowired
+    private userRepository userRepository;
+
     public List<Tag> listTags() {
         return tagRepository.findAll();
     }
@@ -32,25 +36,20 @@ public class ImageService {
         return imageRepository.findAll();
     }
 
-    public Image uploadImage(ImageDTO imageDTO, byte[] file) throws IOException {
+    public Image uploadImage(ImageDTO imageDTO, byte[] file, Long id) throws IOException {
         Image newImage = new Image();
         newImage.setTitle(imageDTO.getTitle());
         newImage.setDescription(imageDTO.getDescription());
-        System.out.println(imageDTO.getTags().size());
         Set<Tag> tagsList = new HashSet<>();
-        System.out.println("Creo nuevo set");
         tagsList.addAll(imageDTO.getTags());
-        System.out.println("guardo los tags del tdo ne el set");
         newImage.setTags(tagsList);
-        System.out.println("guardo el set en newimage");
         newImage.setFile(file);
-        System.out.println("Guardó los bytes");
-        System.out.println(file);
-        System.out.println(newImage.getTitle());
+        User user = userRepository.getReferenceById(id);
+        System.out.println("Dueño de esta imagen: "+user.getFullname());
+        newImage.setUser(user);
         return imageRepository.save(newImage);
 
     }
-
 
 
     public byte[] imageByte(Integer id)  {

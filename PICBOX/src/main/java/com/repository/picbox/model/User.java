@@ -54,6 +54,6 @@ public class User {
     private String rol;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Album> albums = new ArrayList<>();
+    private List<Image> images = new ArrayList<>();
 
 }

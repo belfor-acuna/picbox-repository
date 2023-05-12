@@ -15,10 +15,10 @@
   .navbar .dropdown-item:hover{
     background-color: #99cfee;
   }
-  #searchbar{
-    width: 57%;
-    margin-right: 1%;
-  }
+ #searchbar{
+  width: 60%;
+  margin-right: 1%;
+}
   
   img{
     image-rendering: optimizeQuality;

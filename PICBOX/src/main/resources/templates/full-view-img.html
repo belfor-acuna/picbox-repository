@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" media='screen' href="/static/css/full-view-img.css" />
+    <link rel="stylesheet" type="text/css" media='screen' href="/css/full-view-img.css" />
     <script src="https://kit.fontawesome.com/cc86eb82ec.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <title>Picbox</title>
 </head>
 <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #4d749e">
-    <a class="navbar-brand" href="landing-page.html"><img src="/static/assets/logo/logo-with-title.png" class="ms-1 rounded-circle" height="60" alt=""></a>
+    <a class="navbar-brand" href="/gallery"><img src="/assets/logo/logo-with-title.png" class="ms-1 rounded-circle" height="60" alt=""></a>
     <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation"></button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
@@ -37,17 +37,17 @@
         </ul>
     </div>
 </nav> <br><br><br><br><br>
-<body class="container-fluid mt-4" style="background-color: #bbe6e993;" th:each="image : ${image}">
-    <div class="row d-flex justify-content-center mt-5">
+<body class="container-fluid mt-4" style="background-color: #bbe6e993;" th:each="image:${image}">
+    <div class="row d-flex justify-content-center">
         <img th:src="@{/image/{id}(id=${image.id})}" class="w-50" alt="">
     </div>
-    <div class="row mt-5 p-3" style="background-color: #497174;">
+    <div class="row mt-5 p-1" style="background-color: #497174;" th:each="user:${image.user}">
         <div class="col-1">
-            <a href="#"><img src="/resources/dos-autos.png" class="w-100 mt-2 rounded-circle" alt=""></a>
+            <a href="#"><img th:src="@{/userImage/{id}(id=${user.id})}" class="w-100 mt-2 rounded-circle" alt=""></a>
         </div>
         <div class="col-2">
-            <a href="#" class="text-decoration-none"><h5 class="mt-2 text-white"> Belfor Acuña</h5></a>
-            <p class="fs-5" style="color: rgb(4, 247, 255);"> @b.acuna </p>
+            <a href="#" class="text-decoration-none"><h5 class="mt-2 text-white" th:text="${user.fullname}"> Belfor Acuña</h5></a>
+            <p class="fs-5" style="color: rgb(4, 247, 255);" th:text="${user.username}"></p>
         </div>
         <div class="col-1">
             <div class="d-flex h-100 vr">
@@ -70,15 +70,11 @@
         <div class="col-9" >
             <h2 class="fs-4" style="color:#73B0B5"> Descripción: </h2>
             <p class="text-white fs-6 fw-lighter" th:text="${image.description}">  </p>
-            <h2 class="fs-5 mt-4" style="color:#73B0B5"> Contactame: </h2>
-            <p class="fs-4 fst-italic" style="color: #EB6440;"> <i class="fa-solid fa-envelope"></i> b.acuna02@ufromail.cl</p>
             <h3 class="fs-5 mt-5" style="color:#73B0B5"> Etiquetas: </h3>
             <div class="row">
                 <div class="col-2" th:each="tag: ${image.tags}">
                     <a href="#"><p class="btn btn-secondary w-100" th:text="${tag.name}"> </p></a>
                 </div>
-
-                
             </div>
         </div>
     </div>

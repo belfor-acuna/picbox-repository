@@ -54,7 +54,7 @@ public class UserController {
     }
 
     @PostMapping("/api/login")
-    public String loginUser(LoginDTO loginDTO, Model model){
+    public String loginUser(LoginDTO loginDTO, Model model) throws Exception {
         String rol = "";
         try {
              rol = service.loginUser(loginDTO);
@@ -65,9 +65,9 @@ public class UserController {
             return "redirect:/login";
         }
         if (rol.equals("Administrador"))return "redirect:/showUsers";
-
-        if (rol.equals("Usuario"))return "redirect:/gallery";
-        return rol;
+        else {
+            return "redirect:/userGallery/"+service.getIdByEmail(loginDTO);
+        }
     }
 
     @GetMapping("/users/edit/{id}")

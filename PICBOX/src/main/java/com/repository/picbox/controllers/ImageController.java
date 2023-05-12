@@ -1,6 +1,7 @@
 package com.repository.picbox.controllers;
 import com.repository.picbox.model.*;
 import com.repository.picbox.services.ImageService;
+import com.repository.picbox.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,8 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
-
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/gallery")
     public String gallery(Model model) {
@@ -29,25 +31,27 @@ public class ImageController {
     }
 
 
-    @GetMapping("/upload")
-    private String showUploadImageView(Model model){
+
+    @GetMapping("/upload/{id}")
+    private String showUploadImageView(Model model, @PathVariable("id") Long id){
+        model.addAttribute("currentUser", userService.getUserById(id));
         model.addAttribute("imageDTO", new ImageDTO());
         model.addAttribute("tags",imageService.listTags());
-        return ("upload-image");
+        return ("/logged-user/upload-image");
     }
 
-    @PostMapping("/api/upload")
-    public String uploadSubmit(ImageDTO imageDTO, Model model, @RequestParam("file")MultipartFile file){
+    @PostMapping("/api/upload/{id}")
+    public String uploadSubmit(ImageDTO imageDTO, Model model, @RequestParam("file")MultipartFile file,@PathVariable("id")Long id){
         try{
             byte[] fileData = file.getBytes();
-            imageService.uploadImage(imageDTO, fileData);
+            imageService.uploadImage(imageDTO, fileData,id);
         }
         catch (Exception e){
             System.err.println("ERROR postmapping: "+e);
-            return "redirect:/upload";
+            return "redirect:/upload/"+id;
 
         }
-        return "redirect:/gallery";
+        return "redirect:/userGallery/"+id;
     }
 
     @GetMapping("/image/{id}")
@@ -59,6 +63,18 @@ public class ImageController {
             headers.setContentType(MediaType.IMAGE_JPEG);
             headers.setContentLength(imageService.imageByte(id).length);
             return new ResponseEntity<>(imageService.imageByte(id), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/userImage/{id}")
+    public ResponseEntity<byte[]> showUserImage(@PathVariable("id") Long id, Model model) throws IOException {
+        User user = userService.getUserById(id);
+        if (user.getProfilePicture() == null) {
+            return ResponseEntity.notFound().build();
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        headers.setContentLength(user.getProfilePicture().length);
+        return new ResponseEntity<>(user.getProfilePicture(), headers, HttpStatus.OK);
     }
 
      @GetMapping("/fullview/image/{id}")

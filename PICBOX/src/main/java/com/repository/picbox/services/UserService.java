@@ -15,7 +15,6 @@ public class UserService {
     @Autowired
     private userRepository userRepository;
 
-
     public List<User> listUsers() {
         return userRepository.findAll();
     }
@@ -29,9 +28,9 @@ public class UserService {
         user.setPassword(registerDTO.getPassword());
         user.setUsername(registerDTO.getUsername());
         user.setProfession(registerDTO.getProfession());
-        user.setAboutYou(null);
-        user.setBoxDescription(null);
-        user.setBoxName(null);
+        user.setAboutYou("Hola! soy "+registerDTO.getFullname()+", soy "+registerDTO.getProfession()+ ". Si quieres contactarte conmigo enviame un correo a "+registerDTO.getEmail());
+        user.setBoxDescription("Aqui verás mis imagenes :)");
+        user.setBoxName("Box de "+ registerDTO.getFullname());
         user.setPhoneNumber(null);
         user.setProfilePicture(null);
         user.setRol(registerDTO.getRol());
@@ -42,6 +41,13 @@ public class UserService {
         User user = userRepository.findByEmail(loginDTO.getEmail()).orElseThrow(()-> new Exception("Usuario no existe"));
         if(!user.getPassword().equals(loginDTO.getPassword())) throw new Exception("Contraseña Incorrecta");
         return user.getRol();
+    }
+
+    public Long getIdByEmail(LoginDTO loginDTO) throws Exception {
+
+        User user = userRepository.findByEmail(loginDTO.getEmail()).orElseThrow(()-> new Exception("Usuario no existe"));
+        return user.getId();
+
     }
 
     public User getUserById(Long id){
