@@ -25,6 +25,8 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownId" style="background-color: #000000;">
                     <a class="dropdown-item text-white" th:href="@{/userProfile/{id}(id=${thisUser.id})}">Mi perfil</a>
                     <a class="dropdown-item text-white" th:href="@{/userSettings/{id}(id=${thisUser.id})}">Configuracion de Usuario</a>
+                    <a class="dropdown-item text-white" href="/gallery">Cerrar sesión</a>
+
                 </div>
             </li>
             <li class="nav-item">
@@ -38,12 +40,12 @@
         </ul>
     </div>
 </nav>
-  <body>
+  <body th:each="thisUser:${currentUser}">
     <div class="container-fluid">
         <ul class="art-gallery">
             <li th:each="image:${images}">
                 <img th:src="@{/image/{id}(id=${image.id})}">
-                    <a th:href="@{/fullview/image/{id}(id=${image.id})}" class="w-100">
+                    <a th:href="@{/fullview/{userId}/image/{id}(userId=${thisUser.id},id=${image.id})}" class="w-100">
                         <div class="overlay">
                         <span th:text="${image.title}"></span>
                         </div>

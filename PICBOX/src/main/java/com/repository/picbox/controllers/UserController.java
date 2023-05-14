@@ -96,4 +96,11 @@ public class UserController {
         service.deleteUser(id);
         return "redirect:/showUsers";
     }
+
+    @GetMapping("/viewProfile/{id}")
+    public String viewProfile(Model model, @PathVariable("id") Long userId){
+        model.addAttribute("userProfile", service.getUserById(userId));
+        return "view-profile";
+    }
+
 }
