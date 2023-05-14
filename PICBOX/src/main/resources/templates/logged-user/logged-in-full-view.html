@@ -35,6 +35,9 @@
             <li class="nav-item">
                 <a class="nav-link ms-2 btn text-white" th:href="@{/userGallery/{id}(id=${thisUser.id})}" style="background-color:#79a6c4">Galería</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/userProfile/{id}(id=${thisUser.id})}"><img th:src="@{/userImage/{id}(id=${thisUser.id})}" height="60" class="rounded" ></a>
+            </li>
 
         </ul>
     </div>

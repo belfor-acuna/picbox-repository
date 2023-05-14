@@ -1,12 +1,15 @@
 package com.repository.picbox.controllers;
 
+import com.repository.picbox.model.User;
 import com.repository.picbox.services.ImageService;
 import com.repository.picbox.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
 
@@ -28,10 +31,32 @@ public class LoggedInUserController {
 
 
     @GetMapping("/userProfile/{id}")
-    public String showLoggedInProfile(@PathVariable("id") Long id, Model model){
+    public String showUserProfile(@PathVariable("id") Long id, Model model){
         model.addAttribute("currentUser",userService.getUserById(id));
         return "/logged-user/profile";
     }
+
+
+    @GetMapping("/userSettings/{id}")
+    public String showUserSettings(@PathVariable("id") Long id, Model model){
+        model.addAttribute("currentUser",userService.getUserById(id));
+        return "/logged-user/profile-settings";
+    }
+
+    @PostMapping("/api/userSettings/account/{id}")
+    public String updateUser(@PathVariable Long id, @ModelAttribute("currentUser") User user, Model model) throws Exception {
+        try{
+            User existingUser = userService.getUserById(id);
+            existingUser.setId(id);
+            existingUser.setUsername(user.getUsername());
+            existingUser.setEmail(user.getEmail());
+            userService.updateUser(existingUser);
+        }catch (Exception e){
+            return "redirect:/userSettings/"+id;
+        }
+        return "redirect:/userSettings/"+id;
+    }
+
 
     @GetMapping("/fullview/{userId}/image/{id}")
     public String LoggedInFullViewImage(Model model, @PathVariable("id") Integer id, @PathVariable("userId") Long userId) throws IOException {
@@ -49,5 +74,7 @@ public class LoggedInUserController {
             model.addAttribute("userProfile", userService.getUserById(profileId));
             return "/logged-user/view-other-profile";
     }
+
+
 
 }

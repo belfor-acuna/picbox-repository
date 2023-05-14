@@ -28,7 +28,7 @@ public class UserService {
         user.setPassword(registerDTO.getPassword());
         user.setUsername(registerDTO.getUsername());
         user.setProfession(registerDTO.getProfession());
-        user.setAboutYou("Hola! soy "+registerDTO.getFullname()+", soy "+registerDTO.getProfession()+ ". Si quieres contactarte conmigo enviame un correo a "+registerDTO.getEmail());
+        user.setAboutYou("Hola! soy "+registerDTO.getFullname()+ ". Si quieres contactarte conmigo enviame un correo a "+registerDTO.getEmail());
         user.setBoxDescription("Aqui verás mis imagenes :)");
         user.setBoxName("Box de "+ registerDTO.getFullname());
         user.setPhoneNumber(null);
