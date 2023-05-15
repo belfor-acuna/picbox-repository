@@ -36,7 +36,7 @@ public class ImageController {
     private String showUploadImageView(Model model, @PathVariable("id") Long id){
         model.addAttribute("currentUser", userService.getUserById(id));
         model.addAttribute("imageDTO", new ImageDTO());
-        model.addAttribute("tags",imageService.listTags());
+        model.addAttribute("selectedTags",imageService.listTags());
         return ("/logged-user/upload-image");
     }
 

@@ -37,6 +37,10 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public Optional<User> getUserByName(String username){
+        return userRepository.findByUsername(username);
+    }
+
     public String loginUser(LoginDTO loginDTO) throws Exception{
         User user = userRepository.findByEmail(loginDTO.getEmail()).orElseThrow(()-> new Exception("Usuario no existe"));
         if(!user.getPassword().equals(loginDTO.getPassword())) throw new Exception("Contraseña Incorrecta");

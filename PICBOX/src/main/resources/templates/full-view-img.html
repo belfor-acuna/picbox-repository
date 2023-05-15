@@ -69,7 +69,7 @@
             <h3 class="fs-5 mt-5" style="color:#73B0B5"> Etiquetas: </h3>
             <div class="row">
                 <div class="col-2" th:each="tag: ${image.tags}">
-                    <a href="#"><p class="btn btn-secondary w-100" th:text="${tag.name}"> </p></a>
+                    <a th:href="@{/gallery/search/{tags}(tags=${tag.name})}"><p class="btn btn-secondary w-100" th:text="${tag.name}"> </p></a>
                 </div>
             </div>
         </div>

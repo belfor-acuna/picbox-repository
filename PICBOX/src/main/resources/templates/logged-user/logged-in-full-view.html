@@ -15,8 +15,9 @@
     <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation"></button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
-        <form class="d-flex my-2 my-lg-0" id="searchbar">
-            <input class="form-control me-sm-2 rounded-pill" id="bar" type="text" placeholder="Buscar">
+        <form class="d-flex my-2 my-lg-0" id="searchbar" th:action="@{/loggedGallery/search}" method="post">
+            <input class="form-control me-sm-2 rounded-pill" id="tags" type="text" name="tags" placeholder="Buscar" th:value="${tags}">
+            <input class="d-none" type="hidden" id="userid" name="userid" th:value="${thisUser.id}">
             <button class="btn my-2 my-sm-0 text-white" type="submit" style="background-color:#000000">Buscar</button>
         </form>
         <ul class="navbar-nav me-auto mt-2 mt-lg-0">
@@ -76,9 +77,9 @@
             <h2 class="fs-4" style="color:#73B0B5"> Descripción: </h2>
             <p class="text-white fs-6 fw-lighter" th:text="${image.description}">  </p>
             <h3 class="fs-5 mt-5" style="color:#73B0B5"> Etiquetas: </h3>
-            <div class="row">
+            <div class="row" th:each="thisUser: ${currentUser}">
                 <div class="col-2" th:each="tag: ${image.tags}">
-                    <a href="#"><p class="btn btn-secondary w-100" th:text="${tag.name}"> </p></a>
+                    <a th:href="@{/loggedGallery/{id}/search/{tags}(id=${thisUser.id},tags=${tag.name})}"><p class="btn btn-secondary w-100" th:text="${tag.name}"> </p></a>
                 </div>
             </div>
         </div>
