@@ -20,9 +20,8 @@
       <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
               aria-expanded="false" aria-label="Toggle navigation"></button>
       <div class="collapse navbar-collapse" id="collapsibleNavId">
-          <form class="d-flex my-2 my-lg-0" id="searchbar" th:action="@{/loggedGallery/search}" method="post">
-              <input class="form-control me-sm-2 rounded-pill" id="tags" type="text" name="tags" placeholder="Buscar" th:value="${tags}">
-              <input class="d-none" type="hidden" id="userid" name="userid" th:value="${thisUser.id}">
+          <form class="d-flex my-2 my-lg-0" id="searchbar">
+              <input class="form-control me-sm-2 rounded-pill" id="bar" type="text" placeholder="Buscar">
               <button class="btn my-2 my-sm-0 text-white" type="submit" style="background-color:#000000">Buscar</button>
           </form>
           <ul class="navbar-nav me-auto mt-2 mt-lg-0">
@@ -59,7 +58,7 @@
                         <label for="file" class="fs-5 text-center text-white mt-2">Elige o arrastra tu imagen</label>
                         <input type="file" name="file" required id="file" class=" py-5 w-75 mt-2 rounded" style="background-color: #fff;">
                     </div>
-                    
+
                 </div>
                 <div class="col-4 ms-1 rounded"  style="background-color: #4d749e">
 
@@ -69,9 +68,9 @@
                           <label for="descripcion" class="form-label text-white fs-5">Descripción:</label>
                           <textarea class="form-control" th:field="*{description}" name="descripcion" placeholder="Dibujo que hice de mi gato cuando programó con Springboot en mi laptop :3" id="descripcion" rows="5" cols="3" style="resize: none;"></textarea>
                         </div>
-                    <label for="selectedTags" class="fs-5 text-white"> Tags: CTRL+CLICK para seleccion multiple</label>
-                        <select name="selectedTags" class="form-select" id="selectedTags" multiple size="4">
-                        <option th:each="tag:${selectedTags}" th:value="${tag.id}" th:text="${tag.name}"></option>
+                    <label for="tags" class="fs-5 text-white"> Tags: CTRL+CLICK para seleccion multiple</label>
+                        <select name="tags" class="form-select" id="tags" multiple size="4">
+                        <option th:each="tag:${tags}" th:value="${tag.id}" th:text="${tag.name}"></option>
                         </select>
                     <div class="row d-flex justify-content-center mb-3">
                         <button class="btn text-white w-25 mt-1 fw-bold" type="submit" style="background-color: #000000;"> Subir </button>
