@@ -37,10 +37,10 @@ public class SearchController {
     }
 
     @PostMapping("/loggedGallery/search")
-    public String LoggedInSearchEngine(@RequestParam("tags")String tags, Model model, @RequestParam("userid")Long id){
+    public String LoggedInSearchEngine(@RequestParam("writtentags")String tags, Model model, @RequestParam("userid")Long id){
         model.addAttribute("currentUser",userService.getUserById(id));
         model.addAttribute("images", searchService.search(tags));
-        model.addAttribute("tags", tags);
+        model.addAttribute("writtentags", tags);
         return "/logged-user/logged-in-gallery";
     }
 

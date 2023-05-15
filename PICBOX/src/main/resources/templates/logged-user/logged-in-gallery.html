@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse" id="collapsibleNavId">
         <a class="navbar-brand" th:href="@{/userGallery/{id}(id=${thisUser.id})}"><img src="/assets/logo/logo-with-title.png" height="60" width="60" class="ms-1 rounded-pill" alt=""></a>
         <form class="d-flex my-2 my-lg-0" id="searchbar" th:action="@{/loggedGallery/search}" method="post">
-            <input class="form-control me-sm-2 rounded-pill" id="tags" type="text" name="tags" placeholder="Buscar" th:value="${tags}">
+            <input class="form-control me-sm-2 rounded-pill" id="writtentags" type="text" name="writtentags" placeholder="Buscar" th:value="${writtentags}">
             <input class="d-none" type="hidden" id="userid" name="userid" th:value="${thisUser.id}">
             <button class="btn my-2 my-sm-0 text-white" type="submit" style="background-color:#000000">Buscar</button>
         </form>
