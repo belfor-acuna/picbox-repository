@@ -1,18 +1,25 @@
 package com.repository.picbox.controllers;
 
 import com.repository.picbox.model.Image;
+import com.repository.picbox.model.Tag;
 import com.repository.picbox.repositories.imageRepository;
+import com.repository.picbox.repositories.tagRepository;
 import com.repository.picbox.services.ImageService;
+import com.repository.picbox.services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+import javax.swing.text.html.Option;
+import java.util.*;
 
 @Controller
 public class SearchController {
+
+    @Autowired
+    SearchService searchService;
 
     @Autowired
     imageRepository imageRepository;
@@ -20,10 +27,12 @@ public class SearchController {
     @Autowired
     ImageService imageService;
 
+    @Autowired
+    tagRepository tagRepository;
+
     @PostMapping("/gallery/search")
     public String searchEngine(@RequestParam("tags")String tags, Model model){
-        List<Image> images = imageRepository.findByTagsName(tags);
-        model.addAttribute("images", images);
+        model.addAttribute("images", searchService.search(tags));
         model.addAttribute("tags", tags);
         return "landing-page";
     }
