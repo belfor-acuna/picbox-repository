@@ -57,6 +57,27 @@ public class LoggedInUserController {
         return "redirect:/userSettings/"+id;
     }
 
+    @GetMapping("/userSettings/general/{id}")
+    public String showUserGeneralSettings(@PathVariable("id") Long id, Model model){
+        model.addAttribute("currentUser", userService.getUserById(id));
+        return "logged-user/profile-settings-general";
+    }
+
+    @PostMapping("/api/userSettings/general/{id}")
+    public String updateUserGeneral(@PathVariable("id") Long id, @ModelAttribute("currentUser") User user, Model model) throws Exception {
+        try{
+            User existingUser = userService.getUserById(id);
+            existingUser.setId(id);
+            existingUser.setFullname(user.getFullname());
+            existingUser.setAboutYou(user.getAboutYou());
+            existingUser.setPhoneNumber(user.getPhoneNumber());
+            userService.updateUser(existingUser);
+        }catch (Exception e){
+            return "redirect:/userSettings/general/"+id;
+        }
+        return "redirect:/userSettings/general/"+id;
+    }
+
 
     @GetMapping("/fullview/{userId}/image/{id}")
     public String LoggedInFullViewImage(Model model, @PathVariable("id") Integer id, @PathVariable("userId") Long userId) throws IOException {

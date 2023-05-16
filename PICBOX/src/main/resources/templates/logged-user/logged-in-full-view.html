@@ -48,8 +48,8 @@
         <img th:src="@{/image/{id}(id=${image.id})}" class="w-50" alt="">
     </div>
     <div class="row mt-5 p-1" style="background-color: #497174;" th:each="user:${image.user}">
-        <div class="col-1">
-            <a href="#"><img th:src="@{/userImage/{id}(id=${user.id})}" class="w-100 mt-2 rounded-circle" alt=""></a>
+        <div class="col-1" th:each="thisUser: ${currentUser}">
+            <a th:href="@{/viewOtherProfile/{currentId}/{profileId}(currentId=${thisUser.id},profileId=${user.id})}" ><img th:src="@{/userImage/{id}(id=${user.id})}" class="w-100 mt-2 rounded-circle" alt=""></a>
         </div>
         <div class="col-2" th:each="thisUser: ${currentUser}">
             <a th:href="@{/viewOtherProfile/{currentId}/{profileId}(currentId=${thisUser.id},profileId=${user.id})}" class="text-decoration-none"><h5 class="mt-2 text-white" th:text="${user.fullname}"></h5></a>

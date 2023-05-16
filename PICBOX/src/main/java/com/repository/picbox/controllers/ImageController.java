@@ -54,6 +54,18 @@ public class ImageController {
         return "redirect:/userGallery/"+id;
     }
 
+    @PostMapping("/api/uploadUserImage/{id}")
+    public String uploadUserImage(@RequestParam("file") MultipartFile file, @PathVariable("id") Long id){
+        try{
+            byte[] fileData = file.getBytes();
+            imageService.uploadUserImage(fileData,id);
+        } catch (Exception e){
+            System.err.println("Error al subir imagen de usuario: "+e);
+            return "redirect:/userSettings/general/"+id;
+        }
+        return "redirect:/userSettings/general/"+id;
+    }
+
     @GetMapping("/image/{id}")
     public ResponseEntity<byte[]> showImage(@PathVariable("id") Integer id, Model model) throws IOException {
             if (imageService.imageByte(id) == null) {

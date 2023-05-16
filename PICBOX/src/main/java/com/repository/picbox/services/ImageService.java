@@ -55,5 +55,11 @@ public class ImageService {
     public byte[] imageByte(Integer id)  {
         return getImageById(id).getFile();
     }
+
+    public User uploadUserImage(byte[] fileData, Long id) {
+        User user = userRepository.getReferenceById(id);
+        user.setProfilePicture(fileData);
+        return userRepository.save(user);
+    }
 }
 

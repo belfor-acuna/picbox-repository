@@ -30,15 +30,11 @@ public class UserService {
         user.setProfession(registerDTO.getProfession());
         user.setAboutYou("Hola! soy "+registerDTO.getFullname()+ ". Si quieres contactarte conmigo enviame un correo a "+registerDTO.getEmail());
         user.setBoxDescription("Aqui verás mis imagenes :)");
-        user.setBoxName("Box de "+ registerDTO.getFullname());
+        user.setBoxName("Mi primer box");
         user.setPhoneNumber(null);
         user.setProfilePicture(null);
         user.setRol(registerDTO.getRol());
         userRepository.save(user);
-    }
-
-    public Optional<User> getUserByName(String username){
-        return userRepository.findByUsername(username);
     }
 
     public String loginUser(LoginDTO loginDTO) throws Exception{
