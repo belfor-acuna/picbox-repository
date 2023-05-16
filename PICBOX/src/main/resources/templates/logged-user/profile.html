@@ -23,23 +23,19 @@
             <button class="btn my-2 my-sm-0 text-white" type="submit" style="background-color:#000000">Buscar</button>
         </form>
         <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link ms-2 mt-1 btn text-white w-100" th:href="@{/upload/{id}(id=${thisUser.id})}">Subir imagen</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ms-2 mt-1 btn text-white" th:href="@{/userGallery/{id}(id=${thisUser.id})}">Galería</a>
+            </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle btn text-white ms-1" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="background-color:#79a6c4" th:text="${thisUser.fullname}">Belfor Acuña</a>
+                <a class="nav-link dropdown-toggle btn text-white ms-1 mt-1" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="background-color:#79a6c4" th:text="${thisUser.fullname}">Belfor Acuña</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownId" style="background-color: #000000;">
                     <a class="dropdown-item text-white" th:href="@{/userProfile/{id}(id=${thisUser.id})}"  style="background-color:#79a6c4">Mi perfil</a>
                     <a class="dropdown-item text-white" th:href="@{/userSettings/{id}(id=${thisUser.id})}">Configuracion de Usuario</a>
                     <a class="dropdown-item text-white" href="/gallery">Cerrar sesión</a>
                 </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link ms-2 btn text-white w-100" th:href="@{/upload/{id}(id=${thisUser.id})}">Subir imagen</a>
-
-            <li class="nav-item">
-                <a class="nav-link ms-2 btn text-white" th:href="@{/userGallery/{id}(id=${thisUser.id})}">Galería</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/userProfile/{id}(id=${thisUser.id})}"><img th:src="@{/userImage/{id}(id=${thisUser.id})}" height="60" class="rounded" ></a>
             </li>
         </ul>
     </div>
@@ -55,14 +51,14 @@
                       <h1 class="font-weight-light mt-3" th:text="${thisUser.boxName}"></h1>
                       <p class="lead text-muted" th:text="${thisUser.aboutYou}"></p>
                       <p class="fw-bold" th:text="${thisUser.profession}"></p>
-                      <p class="lead text-muted" th:text="${thisUser.boxDescription}"></p>
                         <p th:if="${thisUser.phoneNumber!=null}" th:text="${thisUser.phoneNumber}"></p>
+                        <p th:if="${thisUser.boxDescription!=null}" class="lead text-dark" th:text="${thisUser.boxDescription}"></p>
                     </div>
 
                   </div>
                 </section>
             
-                <div class="album py-5" id="album-1">
+                <div class="album" id="album-1">
                   <div class="container">
             
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
