@@ -44,7 +44,7 @@ public class User {
     @Column( name = "phoneNumber", length = 12, unique = true, nullable = true)
     private String phoneNumber;
 
-    @Column( name = "boxName",length = 25, unique = true, nullable = true)
+    @Column( name = "boxName",length = 25, nullable = true)
     private String boxName;
 
     @Column( name = "boxDescription",length = 200, nullable = true)

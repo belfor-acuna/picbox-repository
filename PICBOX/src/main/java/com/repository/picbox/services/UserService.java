@@ -62,9 +62,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void deleteUser(Long id){
-        userRepository.delete(getUserById(id));
-    }
+   
 
     private void verifyData(RegisterDTO registerDTO) throws Exception{
         if(registerDTO.getUsername()==null) throw new Exception("Nombre de usuario no ingresado");

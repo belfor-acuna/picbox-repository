@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" media='screen' href="/css/landing-style.css" />
+    <script src="https://kit.fontawesome.com/cc86eb82ec.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <title>Picbox</title>
+</head>
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #4d749e">
+    <a class="navbar-brand" href="landing-page.html"><img src="/assets/logo/logo-with-title.png" class="ms-1 rounded-circle" height="60" width="60" alt=""></a>
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation"></button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+           
+            <li class="nav-item">
+                <a class="nav-link mt-1 ms-2 btn text-white" th:href="@{/admin/dashboard}"  style="background-color:#79a6c4">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mt-1 ms-2 btn text-white" th:href="@{/gallery}"  style="background-color:#79a6c4">Log out</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+<br><br><br><br><br>
+<body >
+    <div class="container">
+        <div class="row">
+            <h1 class="text-secondary fs-2 text-center"> Lista de usuarios</h1>
+        </div>
+        <div class="row">
+            <table class="table table-striped table-bordered">
+                <thead class="table-secondary">
+                <tr>
+                    <th class=""> Nombre de usuario</th>
+                    <th class=""> Nombre</th>
+                    <th class=""> Email</th>
+                    <th class=""> Rol</th>
+                    <th> Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user:${users}">
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.fullname}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.rol}"></td>
+                    <td>
+                        <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-dark text-white">Editar</a>
+                        <a th:href="@{/users/{id}(id=${user.id})}" class="btn btn-secondary text-white ms-4">Eliminar</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

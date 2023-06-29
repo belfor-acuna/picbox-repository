@@ -15,48 +15,45 @@
     <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation"></button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
-        <form class="d-flex my-2 my-lg-0" id="searchbar">
-            <input class="form-control me-sm-2 rounded-pill" id="bar" type="text" placeholder="Buscar">
-            <button class="btn my-2 my-sm-0 text-white" type="submit" style="background-color:#000000">Buscar</button>
-        </form>
         <ul class="navbar-nav me-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link mt-1 ms-2 btn text-white" href="/showUsers"  style="background-color:#79a6c4">Show Users</a>
+                <a class="nav-link mt-1 ms-2 btn text-white" th:href="@{/admin/dashboard}"  style="background-color:#79a6c4">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link mt-1 ms-2 btn text-white" href="/gallery">Galería</a>
+                <a class="nav-link mt-1 ms-2 btn text-white" th:href="@{/gallery}"  style="background-color:#79a6c4">Log out</a>
             </li>
-
         </ul>
     </div>
 
 </nav>
 <br><br><br><br><br>
-<body>
+<body >
     <div class="container">
         <div class="row">
-            <h1 class="text-secondary fs-2 text-center"> Lista de usuarios</h1>
+            <h1 class="text-secondary fs-2 text-center"> Lista de imagenes</h1>
         </div>
         <div class="row">
             <table class="table table-striped table-bordered">
                 <thead class="table-secondary">
                 <tr>
-                    <th class=""> Nombre de usuario</th>
-                    <th class=""> Nombre</th>
-                    <th class=""> Email</th>
-                    <th class=""> Rol</th>
-                    <th> Acciones</th>
+                    <th class=""> Imagen</th>
+                    <th class=""> Titulo de Imagen</th>
+                    <th class=""> Descripción</th>
+                    <th class=""> Tags</th>
+                    <th class=""> Subida por</th>
+                    <th> Acción</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="user:${users}">
-                    <td th:text="${user.username}"></td>
-                    <td th:text="${user.fullname}"></td>
-                    <td th:text="${user.email}"></td>
-                    <td th:text="${user.rol}"></td>
+                <tr th:each="image:${images}">
+                    <td class="text-center"><img th:src="@{/image/{id}(id=${image.id})}" class="w-50 mx-auto rounded"></td>
+                    <td th:text="${image.title}"></td>
+                    <td th:text="${image.description}"></td>
+                    <td> <p th:each="tag:${image.tags}"><span th:text="${tag.name}"></span></p></td>
+                    <td th:each="user:${image.user}" th:text="${user.username}"></td>
+
                     <td>
-                        <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-dark text-white">Editar</a>
-                        <a th:href="@{/users/{id}(id=${user.id})}" class="btn btn-secondary text-white ms-4">Eliminar</a>
+                        <a th:href="@{/admin/deleteImage/{id}(id=${image.id})}" class="btn btn-secondary text-white ms-4">Eliminar</a>
                     </td>
                 </tr>
                 </tbody>
