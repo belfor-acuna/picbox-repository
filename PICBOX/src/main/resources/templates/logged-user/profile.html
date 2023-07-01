@@ -7,7 +7,7 @@
     <script src="https://kit.fontawesome.com/cc86eb82ec.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" media='screen'  href="/css/profile.css">
+    <link rel="stylesheet" type="text/css" media='screen'  href="/css/landing-style.css">
     <title>Picbox</title>
 </head>
 <body style="background-image: url('/assets/Background.png')" th:each="thisUser:${currentUser}">
@@ -57,27 +57,23 @@
 
                   </div>
                 </section>
-            
-                <div class="album" id="album-1">
                   <div class="container">
-            
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                      <div class="col" th:each="image: ${thisUser.images}">
-                        <div class="card shadow-sm">
-                            <img th:src="@{/image/{id}(id=${image.id})}" class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" focusable="false">
-                          </svg>
-            
-                          <div class="card-body">
-                            <p class="fw-bold" th:text="${image.title}"></p>
-                            <p class="card-text" th:text="${image.description}"></p>
-                            <div class="d-flex justify-content-between align-items-center">
-                              <div class="btn-group">
-                                  <a th:href="@{/fullview/{userId}/image/{id}(userId=${thisUser.id},id=${image.id})}" class="btn btn-sm btn-outline-secondary"> Ver foto</a>
-                              </div>
+                      <div class="col" >
+                          <div class="container-fluid">
+                              <ul class="art-gallery">
+                                  <li th:each="image: ${thisUser.images}">
+                                      <img th:src="@{/image/{id}(id=${image.id})}">
+                                          <a th:href="@{/fullview/{userId}/image/{id}(userId=${thisUser.id},id=${image.id})}" class="w-100">
+                                              <div class="overlay">
+                                              <span th:text="${image.title}"></span>
+                                              </div>
+                                          </a>
+                                  </li>
+                              </ul>
                             </div>
-                          </div>
+                              
+                            </div>
                         </div>
-                      </div>
                     </div>
                   </div>
                 </div>

@@ -25,7 +25,7 @@ public class ImageService {
     private userRepository userRepository;
 
     public List<Tag> listTags() {
-        return tagRepository.findAll();
+        return tagRepository.findAllByOrderByName();
     }
 
     public Image getImageById(Integer id){

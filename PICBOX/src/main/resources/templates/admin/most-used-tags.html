@@ -30,27 +30,19 @@
 <br><br><br><br><br>
 <body style="background-image: url('/assets/Background.png')">
 <div class="container-fluid ">
-    <br><br><br><br><br>
- <div class="row justify-content-center d-flex">
-    <a class="col-6-xl col-12-sm btn btn-primary w-25 rounded-pill" th:href="@{/admin/showUsers}">
-        <p class="fw-bold"> Cuentas Creadas</p>
-        <p th:text="${cuentasCreadas}"></p>
-    </a>
-    <a class="col-6-xl col-12-sm btn btn-dark w-25 ms-2 rounded-pill" th:href="@{/admin/manageImages}">
-        <p class="fw-bold"> Imagenes Subidas</p>
-        <p th:text="${imagenesCreadas}"></p>
-    </a>
-    <a class="col-6-xl col-12-sm btn btn-warning w-25 ms-2 rounded-pill" th:href="@{/admin/manageTags}">
-        <p class="fw-bold"> Tags Creados</p>
-        <p th:text="${tagsCreados}"></p>
-    </a>
-    <a class="col-6-xl col-12-sm btn btn-success w-25 rounded-pill mt-3" th:href="@{/admin/mostUsedTags}">
+ <div class="row justify-content-center d-flex mt-4">
+    <a class="col-6-xl col-12-sm btn btn-primary w-25 rounded-pill">
         <p class="fw-bold"> Tags Mas Usados</p>
-        
     </a>
-
-
  </div>
+ <div class="row justify-content-center d-flex mt-2">
+    <div class="col-2 mt-1 btn btn-outline-dark rounded-pill"th:each=tag:${tags}>
+        <p class=" w-100" th:text=${tag.name}></p>
+        <p th:if="${tag.images.size() == 1}" th:text="${tag.images.size()} + ' uso'"></p>
+        <p th:if="${tag.images.size() != 1}" th:text="${tag.images.size()} + ' usos'"></p>
+    </div>
+ </div>
+ 
 </div>
 </body>
 </html>

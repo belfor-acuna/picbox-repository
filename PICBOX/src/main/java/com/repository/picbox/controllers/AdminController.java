@@ -31,6 +31,7 @@ public class AdminController {
         model.addAttribute("cuentasCreadas", adminService.getCantidadDeUsuarios());
         model.addAttribute("imagenesCreadas",adminService.getCantidadDeImagenes());
         model.addAttribute("tagsCreados", adminService.getCantidadDeTags());
+   
 
         return "admin/admin-dashboard";
     }
@@ -74,6 +75,12 @@ public class AdminController {
             System.out.println(e);
         }
         return "redirect:/admin/manageImages";
+    }
+
+    @GetMapping("/mostUsedTags")
+    public String showMostUsedTags(Model model){
+        model.addAttribute("tags", adminService.mostUsedTags(imageService.listTags()));
+        return "admin/most-used-tags";
     }
 
 }

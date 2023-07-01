@@ -86,9 +86,9 @@ public class UserController {
             existingUser.setFullname(user.getFullname());
             userService.updateUser(existingUser);
         }catch (Exception e){
-            return "redirect:/showUsers";
+            return "redirect:/admin/showUsers";
         }
-        return "redirect:/showUsers";
+        return "redirect:/admin/showUsers";
     }
 
     @GetMapping("/users/{id}")

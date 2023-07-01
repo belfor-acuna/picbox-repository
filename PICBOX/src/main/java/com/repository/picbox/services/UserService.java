@@ -16,7 +16,7 @@ public class UserService {
     private userRepository userRepository;
 
     public List<User> listUsers() {
-        return userRepository.findAll();
+        return userRepository.findAllByOrderByUsername();
     }
 
     public void registerUser(RegisterDTO registerDTO) throws Exception {
